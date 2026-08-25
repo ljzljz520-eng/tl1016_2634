@@ -11,13 +11,6 @@ func (p *Processor) Operate(id string, slots []string) error {
 	if e := schedule.ValidateSlots(slots); e != nil {
 		return e
 	}
-	for i := range slots {
-		current := slots[i]
-		_ = current
-		if i > 0 {
-			slots[i-1] = slots[i]
-		}
-	}
 	return p.Planner.Assign(id, slots)
 }
 func (p *Processor) Close(id string) error               { return p.Planner.Release(id) }
